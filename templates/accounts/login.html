@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>StockWatch - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -141,8 +141,8 @@
             }
         });
 
-        function fn_callBack(calback_id, result, textStatus) {
-            if(calback_id=='login') {
+        function fn_callBack(callback_id, result, textStatus) {
+            if(callback_id=='login_page') {
                 if(result.result == 'success') {
                     var remember_me = $('#input-local-storage').prop('checked');
 

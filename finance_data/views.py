@@ -75,10 +75,10 @@ def get_finance_data(request):
     # date5 = dates[4]
 
     context = {
-        'us500': us500_res,
-        'nas': nas_res,
-        'dji': dji_res,
-        'usd_krw': usd_krw_res,
+        'us500': us500_json,
+        'nas': nas_json,
+        'dji': dji_json,
+        'usd_krw': usd_krw_json,
         'start_date': start_date,
         'end_date': end_date,
         # 'dates': dates,

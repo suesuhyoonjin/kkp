@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
     {% load static %}
     <meta charset="utf-8">
@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
 
     <title> 스톡워치 - StockWatch </title>
 
@@ -29,7 +30,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home/home_page/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home/">
 <!--                <div class="sidebar-brand-icon rotate-n-15"> -->
                     <img src = "{{ BASE_URL }}/media/stockwatch_logo.png", width="30px" height="30px">
 <!--                    <i class="fas fa-laugh-wink"></i>-->
@@ -40,20 +41,20 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <!-- Nav Item - 키워드 -->
-            <li class="nav-item">
-                <a class="nav-link" href="/home/home_page/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>키워드 대시보드</span></a>
-            </li>
+<!--            &lt;!&ndash; Nav Item - 키워드 &ndash;&gt;-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/home/home_page/">-->
+<!--                    <i class="fas fa-fw fa-tachometer-alt"></i>-->
+<!--                    <span>키워드 대시보드</span></a>-->
+<!--            </li>-->
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+<!--            &lt;!&ndash; Divider &ndash;&gt;-->
+<!--            <hr class="sidebar-divider">-->
 
 
             <!-- Nav Item - 스톡 -->
             <li class="nav-item">
-                <a class="nav-link" href="/home/home_page/">
+                <a class="nav-link" href="/home/">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>스톡 대시보드</span></a>
             </li>
@@ -64,7 +65,7 @@
 
             <!-- Nav Item - 기사 아카이브 -->
             <li class="nav-item">
-                <a class="nav-link" href="/home/home_page/">
+                <a class="nav-link" href="/archive/">
                     <i class="fas fa-fw fa-table"></i>
                     <span>기사 아카이브</span></a>
             </li>
@@ -527,8 +528,8 @@
         chart.update();
     }
 
-    function fn_callBack(calback_id, result, textStatus) {
-        if(calback_id=='get_finance_data') {
+    function fn_callBack(callback_id, result, textStatus) {
+        if(callback_id=='get_finance_data') {
             if(result.result == 'success') {
 
                 var us500_label = [];
@@ -543,28 +544,28 @@
                 var usd_krw_label = [];
                 var usd_krw_data = [];
 
-               $.each(result.us500_res, function(k, v) {
-                   console.log(k + ":" + v.date + ":" + v.stock);
-                   us500_label.push(v.date);
-                   us500_data.push(v.stock);
+               $.each(result.us500_json, function(k, v) {
+                   console.log(k + ":" + v.Date+ ":" + v.Close);
+                   us500_label.push(v.Date);
+                   us500_data.push(v.Close);
                });
 
-               $.each(result.nas_res, function(k, v) {
-                   console.log(k + ":" + v.date + ":" + v.stock);
-                   nas_label.push(v.date);
-                   nas_data.push(v.stock);
+               $.each(result.nas_json, function(k, v) {
+                   console.log(k + ":" + v.Date + ":" + v.Close);
+                   nas_label.push(v.Date);
+                   nas_data.push(v.Close);
                });
 
-               $.each(result.dji_res, function(k, v) {
-                   console.log(k + ":" + v.date + ":" + v.stock);
-                   dji_label.push(v.date);
-                   dji_data.push(v.stock);
+               $.each(result.dji_json, function(k, v) {
+                   console.log(k + ":" + v.Date + ":" + v.Close);
+                   dji_label.push(v.Date);
+                   dji_data.push(v.Close);
                });
 
-               $.each(result.usd_krw_res, function(k, v) {
-                   console.log(k + ":" + v.date + ":" + v.stock);
-                   usd_krw_label.push(v.date);
-                   usd_krw_data.push(v.stock);
+               $.each(result.usd_krw_json, function(k, v) {
+                   console.log(k + ":" + v.Date + ":" + v.Close);
+                   usd_krw_label.push(v.Date);
+                   usd_krw_data.push(v.Close);
                });
 
                removeData(myChart1);
@@ -582,23 +583,19 @@
         }
     }
 
-    $(document).ready(function() {
-        stock_search_date = JSON.stringify({
-            start_date: start_date,
-            end_date: end_date
-        });
-
-        var errormsg ="ERRCODE:10000";
-
-        cfn_ajaxTransmit(
-            '/finance_data/get_finance_data/',
-            stock_search_date,
-            'post',
-            errormsg
-        );
-    });
+    // $(document).ready(function() {
+    //     stock_search_date = JSON.stringify({});
+    //
+    //     var errormsg ="ERRCODE:10000";
+    //
+    //     cfn_ajaxTransmit(
+    //         '/finance_data/get_finance_data/',
+    //         stock_search_date,
+    //         'post',
+    //         errormsg
+    //     );
+    // });
     </script>
-
 </body>
 
 </html>
